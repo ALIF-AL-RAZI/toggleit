@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import ThreeBackground from "./components/ThreeBackground";
-import ThreeScene from "./components/ThreeScene";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,7 +17,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ThreeScene />
         <main>{children}</main>
       </body>
     </html>
