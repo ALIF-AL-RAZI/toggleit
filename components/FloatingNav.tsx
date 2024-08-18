@@ -14,6 +14,7 @@ const FloatingNav = () => {
     width: "0",
     left: "0",
   });
+  const [overviewKey, setOverviewKey] = useState(0); // Add a key state for Overview
 
   const tabRefs = useRef<Record<string, HTMLLIElement | null>>({});
 
@@ -66,6 +67,13 @@ const FloatingNav = () => {
     return () => window.removeEventListener("resize", updateUnderline);
   }, [activeSection]);
 
+  useEffect(() => {
+    if (activeSection === "What We Do") {
+      // Refresh the Overview section by updating the key
+      setOverviewKey((prevKey) => prevKey + 1);
+    }
+  }, [activeSection]);
+
   const scrollToSection = (section: string) => {
     const element = document.getElementById(
       section.toLowerCase().replace(/\s/g, "")
@@ -85,7 +93,7 @@ const FloatingNav = () => {
         <div className="relative">
           <ul className="flex justify-between sm:justify-around md:justify-center gap-2 sm:gap-4 md:gap-10 px-4 py-2 relative text-xs sm:text-sm md:text-base">
             <li
-              className="absolute bottom-0 h-1 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full transition-all duration-300 ease-in-out"
+              className="absolute bottom-0 h-1 bg-[#FF006E] rounded-full transition-all duration-300 ease-in-out"
               style={underlineStyle}
             ></li>
 
@@ -109,10 +117,9 @@ const FloatingNav = () => {
       </nav>
 
       {/* Sections */}
-      <div id="whatwedo" className="h-screen flex items-center justify-center">
-        <h1 className="text-3xl sm:text-4xl md:text-5xl">
-          <Overview />
-        </h1>
+      <div id="whatwedo" className="h-screen">
+        <Overview key={overviewKey} />{" "}
+        {/* Add the key prop to force re-render */}
       </div>
       <div id="about" className="h-screen flex items-center justify-center">
         <h1 className="text-3xl sm:text-4xl md:text-5xl">
