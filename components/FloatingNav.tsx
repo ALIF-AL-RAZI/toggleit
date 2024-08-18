@@ -86,10 +86,15 @@ const FloatingNav = () => {
     }
   };
 
+  const handleContactUsClick = () => {
+    setActiveSection("Contact Us");
+    scrollToSection("contactus");
+  };
+
   return (
     <div>
       {/* Navbar */}
-      <nav className="fixed top-2 w-full max-w-2xl bg-white bg-opacity-30 backdrop-blur-lg shadow-lg z-10 rounded-full mx-auto left-1/2 transform -translate-x-1/2 overflow-hidden">
+      <nav className="fixed top-2 w-full max-w-2xl bg-white bg-opacity-30 backdrop-blur-lg shadow-lg z-20 rounded-full mx-auto left-1/2 transform -translate-x-1/2 overflow-hidden">
         <div className="relative">
           <ul className="flex justify-between sm:justify-around md:justify-center gap-2 sm:gap-4 md:gap-10 px-4 py-2 relative text-xs sm:text-sm md:text-base">
             <li
@@ -117,9 +122,15 @@ const FloatingNav = () => {
       </nav>
 
       {/* Sections */}
-      <div id="whatwedo" className="h-screen">
-        <Overview key={overviewKey} />{" "}
-        {/* Add the key prop to force re-render */}
+      <div id="whatwedo" className="h-screen relative">
+        <video
+          src="./videos/coding.mp4" // Ensure this path is correct
+          className="absolute top-0 left-0 w-full h-full object-cover"
+          autoPlay
+          loop
+          muted
+        ></video>
+        <Overview key={overviewKey} onContactUsClick={handleContactUsClick} />
       </div>
       <div id="about" className="h-screen flex items-center justify-center">
         <h1 className="text-3xl sm:text-4xl md:text-5xl">
